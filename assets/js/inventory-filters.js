@@ -185,7 +185,7 @@ jQuery(document).ready(function($) {
                         `<img src="${post.featured_image}" alt="${post.title}" loading="lazy" ${post.featured_image_srcset ? `srcset="${post.featured_image_srcset}"` : ''}>` : 
                         '<div style="background: #f0f0f0; height: 100%; display: flex; align-items: center; justify-content: center; color: #999;">No Image</div>';
                         
-                    const categoryHtml = post.categories.map(cat => `<span><strong>${cat}</strong></span>`).join('');
+                    const categoryHtml = post.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('');
                     
                     const excerptHtml = post.content ? `<div class="card-content">${post.content}</div>` : (post.excerpt ? `<div class="card-excerpt">${post.excerpt}</div>` : '');
                     
@@ -200,7 +200,7 @@ jQuery(document).ready(function($) {
                                     ${categoryHtml}
                                 </div>
                                 ${excerptHtml}
-                                <a href="${post.permalink}" class="read-more">${this.strings.readMore || 'read more'}</a>
+                                <a href="${post.permalink}" class="read-more">See More Details</a>
                             </div>
                         </div>
                     `;

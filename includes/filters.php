@@ -897,7 +897,7 @@ class InventoryEnhanced_Filters {
                                             <div class="card-details">
                                                 ${categoryHtml}
                                             </div>
-                                            <a href="${post.permalink}" class="read-more">${this.strings.readMore || 'read more'}</a>
+                                            <a href="${post.permalink}" class="read-more">See More Details</a>
                                         </div>
                                     </div>
                                 `;

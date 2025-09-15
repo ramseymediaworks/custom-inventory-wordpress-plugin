@@ -276,22 +276,42 @@
     margin-bottom: 15px;
 }
 
-.card-details span {
-    margin-right: 15px;
+.card-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.card-details .category-tag {
+    background: #f0f4ff;
+    color: #2c5aa0;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
     font-weight: 500;
+    border: 1px solid #e0e8ff;
 }
 
 .read-more {
-    color: #ff6900;
+    display: inline-block;
+    background: #ff6900;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 18px;
-    transition: color 0.3s ease;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .read-more:hover {
-    color: #e55a00;
-    text-decoration: underline;
+    background: #e55a00;
+    transform: translateY(-1px);
+    color: white;
+    text-decoration: none;
 }
 
 /* Load More Button */
