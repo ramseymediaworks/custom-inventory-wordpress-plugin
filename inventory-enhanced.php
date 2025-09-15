@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Inventory Enhanced
- * Plugin URI: https://github.com/yourusername/inventory-enhanced
+ * Plugin URI: https://github.com/ramseymediaworks/custom-inventory-wordpress-plugin
  * Description: Complete inventory solution with smart filtering, enhanced galleries, and professional page templates for heavy equipment dealers.
  * Version: 1.0.0
- * Author: Your Name
- * Author URI: https://yourwebsite.com
+ * Author: Ramsey MediaWorks
+ * Author URI: https://ramseymediaworks.com/
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: inventory-enhanced
