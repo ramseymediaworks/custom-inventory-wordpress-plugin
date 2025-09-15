@@ -504,7 +504,8 @@ class InventoryEnhanced_Ajax {
         
         if ($uses_divi && !empty($post->post_content)) {
             // Save current global post
-            global $post as $original_post;
+            global $post;
+            $original_post = $post;
             
             // Set up the post data properly for Divi processing
             $post = get_post($post_id);
