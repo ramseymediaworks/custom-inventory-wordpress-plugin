@@ -193,7 +193,6 @@ class InventoryEnhanced_Ajax {
                         'featured_image' => $featured_image['url'],
                         'featured_image_srcset' => $featured_image['srcset'],
                         'categories' => $category_names,
-                        'content' => $this->get_processed_content(get_the_ID()), // Processed content
                         'excerpt' => $this->get_smart_excerpt(get_the_ID()), // Fallback excerpt
                         'date' => get_the_date('c'),
                         'post_class' => implode(' ', get_post_class('inventory-item'))
