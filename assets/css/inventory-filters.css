@@ -18,7 +18,7 @@
 /* Filter Sidebar */
 .inventory-filter-sidebar {
     background: white;
-    border-radius: 12px;
+    border-radius: 6px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     padding: 25px;
     height: fit-content;
@@ -125,7 +125,7 @@
     color: white;
     border: none;
     padding: 12px 20px;
-    border-radius: 6px;
+    border-radius: 3px;
     cursor: pointer;
     font-size: 18px;
     font-weight: 600;
@@ -167,7 +167,7 @@
 /* Results Area */
 .inventory-results {
     background: white;
-    border-radius: 12px;
+    border-radius: 6px;
     padding: 25px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     min-height: 400px;
@@ -231,7 +231,7 @@
 
 .inventory-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 6px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -287,18 +287,19 @@
     background: #f0f4ff;
     color: #2c5aa0;
     padding: 4px 10px;
-    border-radius: 12px;
+    border-radius: 6px;
     font-size: 12px;
     font-weight: 500;
     border: 1px solid #e0e8ff;
 }
 
 .read-more {
+    margin-top: 15px;
     display: inline-block;
     background: #ff6900;
     color: white;
     padding: 10px 20px;
-    border-radius: 6px;
+    border-radius: 3px;
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
@@ -325,7 +326,7 @@
     color: white;
     border: none;
     padding: 15px 40px;
-    border-radius: 6px;
+    border-radius: 3px;
     cursor: pointer;
     font-size: 20px;
     font-weight: 600;
@@ -366,7 +367,7 @@
     background: #f8d7da;
     color: #721c24;
     padding: 15px 20px;
-    border-radius: 6px;
+    border-radius: 3px;
     border: 1px solid #f5c6cb;
     font-size: 16px;
     margin: 20px 0;
