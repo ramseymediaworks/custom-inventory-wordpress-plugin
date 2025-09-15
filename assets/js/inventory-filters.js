@@ -187,7 +187,7 @@ jQuery(document).ready(function($) {
                         
                     const categoryHtml = post.categories.map(cat => `<span><strong>${cat}</strong></span>`).join('');
                     
-                    const excerptHtml = post.excerpt ? `<div class="card-excerpt">${post.excerpt}</div>` : '';
+                    const excerptHtml = post.content ? `<div class="card-content">${post.content}</div>` : (post.excerpt ? `<div class="card-excerpt">${post.excerpt}</div>` : '');
                     
                     html += `
                         <div class="inventory-card ${post.post_class || ''}">

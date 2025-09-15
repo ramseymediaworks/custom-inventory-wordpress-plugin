@@ -1,6 +1,6 @@
 === Inventory Enhanced ===
-Contributors: yourusername
-Donate link: https://yourwebsite.com/donate
+Contributors: ramseymediaworks
+Donate link: https://github.com/ramseymediaworks/custom-inventory-wordpress-plugin
 Tags: inventory, filtering, divi, gallery, equipment, trucks, heavy equipment, ajax, categories
 Requires at least: 5.0
 Tested up to: 6.4

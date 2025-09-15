@@ -7,6 +7,7 @@
  * - Inventory loading and pagination
  * - Smart category analysis
  * - Performance optimization with caching
+ * - Proper Divi shortcode processing
  * 
  * @package InventoryEnhanced
  * @since 1.0.0
@@ -192,7 +193,8 @@ class InventoryEnhanced_Ajax {
                         'featured_image' => $featured_image['url'],
                         'featured_image_srcset' => $featured_image['srcset'],
                         'categories' => $category_names,
-                        'excerpt' => $this->get_smart_excerpt(get_the_ID()),
+                        'content' => $this->get_processed_content(get_the_ID()), // Processed content
+                        'excerpt' => $this->get_smart_excerpt(get_the_ID()), // Fallback excerpt
                         'date' => get_the_date('c'),
                         'post_class' => implode(' ', get_post_class('inventory-item'))
                     );
@@ -488,7 +490,61 @@ class InventoryEnhanced_Ajax {
     }
     
     /**
-     * Get smart excerpt for inventory posts
+     * Get processed content for inventory posts (handles Divi shortcodes properly)
+     */
+    private function get_processed_content($post_id) {
+        $post = get_post($post_id);
+        
+        if (!$post) {
+            return '';
+        }
+        
+        // Check if this post uses Divi Builder
+        $uses_divi = get_post_meta($post_id, '_et_pb_use_builder', true) === 'on';
+        
+        if ($uses_divi && !empty($post->post_content)) {
+            // Save current global post
+            global $post as $original_post;
+            
+            // Set up the post data properly for Divi processing
+            $post = get_post($post_id);
+            setup_postdata($post);
+            
+            // Ensure Divi modules are loaded
+            if (function_exists('et_core_load_main_modules')) {
+                et_core_load_main_modules();
+            }
+            
+            // Load Divi frontend builder if needed
+            if (function_exists('et_fb_enabled') && !et_fb_enabled()) {
+                if (function_exists('et_core_load_main_styles')) {
+                    et_core_load_main_styles();
+                }
+            }
+            
+            // Process the content through WordPress filters
+            $content = get_the_content();
+            $content = apply_filters('the_content', $content);
+            $content = str_replace(']]>', ']]&gt;', $content);
+            
+            // Restore original post data
+            if ($original_post) {
+                $post = $original_post;
+                setup_postdata($post);
+            } else {
+                wp_reset_postdata();
+            }
+            
+            return $content;
+        }
+        
+        // For non-Divi posts, process normally
+        $content = apply_filters('the_content', $post->post_content);
+        return $content;
+    }
+    
+    /**
+     * Get smart excerpt for inventory posts (fallback method)
      */
     private function get_smart_excerpt($post_id, $length = 150) {
         $post = get_post($post_id);
@@ -502,7 +558,31 @@ class InventoryEnhanced_Ajax {
             return wp_trim_words($post->post_excerpt, $length / 8, '...');
         }
         
-        // Generate from content
+        // For Divi posts, try to extract meaningful content
+        $uses_divi = get_post_meta($post_id, '_et_pb_use_builder', true) === 'on';
+        
+        if ($uses_divi) {
+            // Extract text from Divi modules
+            $content = $post->post_content;
+            
+            // Remove common Divi shortcode wrappers and extract text content
+            $content = preg_replace('/\[et_pb_[^\]]*\]/', '', $content);
+            $content = preg_replace('/\[\/et_pb_[^\]]*\]/', ' ', $content);
+            
+            // Clean up remaining shortcodes
+            $content = strip_shortcodes($content);
+            $content = wp_strip_all_tags($content);
+            
+            // Remove extra whitespace
+            $content = preg_replace('/\s+/', ' ', $content);
+            $content = trim($content);
+            
+            if (!empty($content)) {
+                return wp_trim_words($content, $length / 8, '...');
+            }
+        }
+        
+        // Fallback: generate from content
         $content = strip_shortcodes($post->post_content);
         $content = wp_strip_all_tags($content);
         

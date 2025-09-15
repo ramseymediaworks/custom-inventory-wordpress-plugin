@@ -45,7 +45,10 @@ inventory-enhanced/
 │   ├── admin.php                       # Settings page & admin interface
 │   ├── ajax.php                        # AJAX handlers & responses
 │   ├── template-importer.php           # JSON template import functionality
-│   └── setup-wizard.php                # First-time setup wizard
+│   ├── setup-wizard.php                # First-time setup wizard
+│   ├── admin-page.php                  # Main dashboard interface
+│   ├── settings-page.php               # Plugin settings page
+│   └── templates-page.php              # Template management page
 ├── assets/
 │   ├── css/
 │   │   ├── inventory-filters.css       # Filter sidebar styling
@@ -59,8 +62,7 @@ inventory-enhanced/
 │       ├── template-previews/          # Screenshots of templates
 │       └── plugin-assets/              # Plugin icons and graphics
 ├── templates/
-│   ├── inventory-homepage.json         # Complete homepage layout
-│   ├── inventory-single.json           # Single item page layout
+│   ├── divi-inventory-layout.json      # Complete homepage layout & Single item page layout
 │   └── demo-content/
 │       ├── sample-inventory.xml        # Demo inventory posts
 │       └── sample-images/              # Sample equipment images
@@ -93,8 +95,8 @@ Inventory (main category)
 │   ├── 579
 │   └── [Other Models]
 ├── Year
+│   ├── 2024
 │   ├── 2023
-│   ├── 2022
 │   └── [Other Years]
 └── Condition
     ├── New
@@ -113,11 +115,12 @@ Inventory (main category)
 
 ### **Setup Wizard Steps**
 1. **Welcome** - Plugin introduction and requirements check
-2. **Templates** - Preview and select page layouts
-3. **Categories** - Auto-create inventory category structure
-4. **Pages** - Import templates and create inventory pages
-5. **Demo Content** - Optional sample inventory for testing
-6. **Complete** - Your inventory website is ready!
+2. **Requirements** - System requirements validation
+3. **Templates** - Preview and select page layouts
+4. **Categories** - Auto-create inventory category structure
+5. **Pages** - Import templates and create inventory pages
+6. **Demo Content** - Optional sample inventory for testing
+7. **Complete** - Your inventory website is ready!
 
 ### **Manual Setup** (Advanced Users)
 1. Create category structure manually
@@ -157,12 +160,14 @@ Access via WordPress Admin → Settings → Inventory Enhanced
 - **Enable Gallery Override**: Toggle Divi gallery enhancements
 - **Filter Layout**: Choose sidebar vs. top layout
 - **Styling Options**: Customize colors and fonts
+- **Performance Settings**: Enable caching and optimization
 
 ### **Shortcode Parameters**
 ```php
 [inventory_filters]                          // Basic usage
 [inventory_filters category="inventory"]     // Custom main category
 [inventory_filters per_page="12"]           // Custom items per page
+[inventory_filters layout="top"]            // Top filter layout
 ```
 
 ## 🎨 Customization
@@ -171,10 +176,20 @@ Access via WordPress Admin → Settings → Inventory Enhanced
 Override plugin styles in your theme:
 ```css
 /* Filter Sidebar */
-.inventory-filter-sidebar { /* Your styles */ }
+.inventory-filter-sidebar { 
+    /* Your custom styles */ 
+}
 
 /* Gallery Enhancements */
-.inventory-enhanced-gallery { /* Your styles */ }
+.inventory-enhanced-gallery { 
+    /* Your custom styles */ 
+}
+
+/* Custom Colors */
+:root {
+    --inventory-primary: #2c5aa0;
+    --inventory-secondary: #ff6900;
+}
 ```
 
 ### **Hook Integration**
@@ -184,11 +199,25 @@ add_filter('inventory_enhanced_filter_results', 'your_custom_function');
 
 // Customize gallery output
 add_filter('inventory_enhanced_gallery_output', 'your_gallery_function');
+
+// Add custom filter sections
+add_action('inventory_enhanced_after_filters', 'your_additional_filters');
 ```
 
-## 🐛 Troubleshooting
+### **Template Customization**
+- Export existing templates as JSON for backup
+- Modify templates in Divi Builder
+- Re-export as new custom templates
+- Share templates between sites
+
+## 🛠 Troubleshooting
 
 ### **Common Issues**
+
+**Setup Wizard Not Appearing**
+- Clear browser cache and reload admin
+- Check PHP error logs for conflicts
+- Ensure proper file permissions
 
 **Divi Builder Timeout**
 - Plugin includes backend protection to prevent conflicts
@@ -209,19 +238,28 @@ add_filter('inventory_enhanced_gallery_output', 'your_gallery_function');
 - Check that posts have multiple relevant categories assigned
 - Ensure AJAX is enabled on your site
 
+**Template Import Fails**
+- Check server PHP memory limit (recommend 256MB+)
+- Verify file permissions in wp-content directory
+- Ensure Divi theme is active for Divi templates
+
 ## 📊 Performance
 
 - **Optimized AJAX**: Minimal server load with efficient queries
 - **Conditional Loading**: Assets only load on inventory pages
 - **Caching Friendly**: Compatible with most caching plugins
 - **Database Efficient**: Streamlined category queries
+- **Image Optimization**: Lazy loading and responsive images
+- **Mobile Optimized**: Touch-friendly interfaces
 
 ## 🔒 Compatibility
 
 - **Themes**: Works with any theme, optimized for Divi
 - **Plugins**: Compatible with most WordPress plugins
-- **Caching**: Works with WP Rocket, W3 Total Cache, etc.
+- **Caching**: Works with WP Rocket, W3 Total Cache, LiteSpeed, etc.
 - **SEO**: Maintains SEO-friendly URLs and meta data
+- **Multisite**: Full multisite network support
+- **Translation Ready**: Full internationalization support
 
 ## 📈 Future Enhancements
 
@@ -229,19 +267,22 @@ add_filter('inventory_enhanced_gallery_output', 'your_gallery_function');
 - **Price Filtering**: Range sliders for pricing
 - **Map Integration**: Location-based filtering  
 - **Export Functionality**: CSV/PDF export of filtered results
-- **Multi-language**: Translation support
+- **Multi-language**: Complete translation support
 - **Custom Fields**: Integration with ACF and other field plugins
 - **Lead Management**: CRM integration for inquiries
 - **Inventory Sync**: Import/export from dealer management systems
 - **Analytics Dashboard**: Track inventory performance and popular items
+- **Email Notifications**: Alert system for new inventory
+- **Advanced Templates**: More layout options and designs
 
-## 🏢 Perfect For
+## 🌟 Perfect For
 
 - **Heavy Equipment Dealers** - Excavators, bulldozers, cranes
 - **Truck Dealerships** - Semi-trucks, commercial vehicles
 - **Trailer Sales** - Flatbeds, tankers, specialized trailers
 - **Construction Equipment** - Rentals and sales
 - **Agricultural Machinery** - Tractors, harvesters, implements
+- **Marine Equipment** - Boats, marine engines, accessories
 - **Any Inventory Business** - Adaptable category structure
 
 ## 🎯 Business Benefits
@@ -252,6 +293,7 @@ add_filter('inventory_enhanced_gallery_output', 'your_gallery_function');
 - **SEO Friendly** - Proper structure improves search rankings
 - **Lead Generation** - Enhanced galleries and clear CTAs increase inquiries
 - **Time Savings** - Setup in hours, not weeks of development
+- **Cost Effective** - No monthly SaaS fees or per-listing charges
 
 ## 💰 ROI Features
 
@@ -260,25 +302,44 @@ add_filter('inventory_enhanced_gallery_output', 'your_gallery_function');
 - **Lower Development Costs** - No custom coding required
 - **Faster Time to Market** - Launch professional inventory site immediately
 - **Scalable Solution** - Grows with your inventory and business
+- **Competitive Advantage** - Stand out from basic inventory sites
 
-## 🤝 Support
+## 🤝 Support & Documentation
 
 For support, feature requests, or bug reports:
-- **Documentation**: Full documentation included
-- **GitHub Issues**: Report bugs and request features
-- **Email Support**: Direct developer contact
+- **Full Documentation** - Comprehensive guides included
+- **Video Tutorials** - Step-by-step setup videos
+- **Community Forum** - Connect with other users
+- **Priority Support** - Direct developer contact for issues
+- **Regular Updates** - Ongoing feature improvements
 
 ## 📄 License
 
 GPL v2 or later - Free to use, modify, and distribute
 
-## 🏷️ Version
+## 🏷️ Version Information
 
 **Current Version**: 1.0.0  
-**WordPress Tested**: 6.3  
+**WordPress Tested**: 6.4  
 **PHP Tested**: 8.2  
-**Divi Tested**: 4.22
+**Divi Tested**: 4.23  
+**Release Date**: 2024  
+**Update Frequency**: Monthly feature updates, weekly bug fixes
+
+## 🔄 Changelog
+
+### Version 1.0.0
+- Initial release
+- Smart inventory filtering system
+- Enhanced Divi gallery override
+- Complete admin interface
+- Setup wizard implementation
+- Template import/export system
+- Mobile responsive design
+- Performance optimizations
 
 ---
 
 **Built for heavy equipment dealers who demand professional inventory management tools.**
+
+*Transform your inventory website today with the most comprehensive inventory solution for WordPress.*
