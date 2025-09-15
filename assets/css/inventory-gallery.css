@@ -1,0 +1,314 @@
+/* Inventory Enhanced Gallery Styles */
+
+.inventory-enhanced-gallery {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+    max-width: 100%;
+}
+
+.inventory-enhanced-gallery .et_pb_gallery_items {
+    padding: 0;
+    margin: 0;
+}
+
+/* Hide default Divi gallery items */
+.inventory-enhanced-gallery .et_pb_gallery_item {
+    display: none !important;
+}
+
+/* Main Display Area */
+.inventory-gallery-main {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: #000;
+    overflow: hidden;
+}
+
+.inventory-gallery-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.inventory-gallery-slide.active {
+    display: block;
+}
+
+.inventory-gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Video Container */
+.inventory-video-container {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventory-video-container iframe,
+.inventory-video-container video {
+    width: 100%;
+    height: 100%;
+    border: none;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Gallery Caption */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+/* Navigation Arrows */
+.inventory-gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(44, 90, 160, 0.8);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    transition: all 0.3s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventory-gallery-nav:hover {
+    background: rgba(44, 90, 160, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.inventory-gallery-nav:focus {
+    outline: 2px solid #ff6900;
+    outline-offset: 2px;
+}
+
+.inventory-gallery-prev {
+    left: 15px;
+}
+
+.inventory-gallery-next {
+    right: 15px;
+}
+
+/* Slide Counter */
+.inventory-slide-counter {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 10;
+}
+
+/* Thumbnail Strip */
+.inventory-gallery-thumbs {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    background: #f8f9fa;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #2c5aa0 #f0f0f0;
+}
+
+.inventory-gallery-thumbs::-webkit-scrollbar {
+    height: 8px;
+}
+
+.inventory-gallery-thumbs::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+.inventory-gallery-thumbs::-webkit-scrollbar-thumb {
+    background: #2c5aa0;
+    border-radius: 4px;
+}
+
+.inventory-thumb-item {
+    flex-shrink: 0;
+    width: 90px;
+    height: 70px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    background: #f0f0f0;
+}
+
+.inventory-thumb-item:hover {
+    border-color: #ff6900;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.inventory-thumb-item.active {
+    border-color: #2c5aa0;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(44, 90, 160, 0.3);
+}
+
+.inventory-thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Video thumbnail indicator */
+.inventory-thumb-item.video::after {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.8);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    padding-left: 2px;
+    font-weight: bold;
+}
+
+/* Loading States */
+.inventory-gallery-slide.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+}
+
+.inventory-gallery-slide.loading::after {
+    content: "Loading...";
+    color: #666;
+    font-size: 18px;
+}
+
+/* Error States */
+.video-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: #f8d7da;
+    color: #721c24;
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .inventory-gallery-main {
+        height: 300px;
+    }
+    
+    .inventory-gallery-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+    
+    .inventory-gallery-prev {
+        left: 10px;
+    }
+    
+    .inventory-gallery-next {
+        right: 10px;
+    }
+    
+    .inventory-thumb-item {
+        width: 70px;
+        height: 55px;
+    }
+    
+    .inventory-gallery-thumbs {
+        padding: 15px;
+        gap: 8px;
+    }
+    
+    .inventory-slide-counter {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    .gallery-caption {
+        font-size: 14px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .inventory-gallery-main {
+        height: 250px;
+    }
+    
+    .inventory-thumb-item {
+        width: 60px;
+        height: 45px;
+    }
+    
+    .inventory-gallery-thumbs {
+        padding: 12px;
+        gap: 6px;
+    }
+}
+
+/* Accessibility */
+.inventory-thumb-item:focus {
+    outline: 2px solid #ff6900;
+    outline-offset: 2px;
+}
+
+.inventory-gallery-slide:focus {
+    outline: none;
+}
+
+/* Animation for slide transitions */
+.inventory-gallery-slide {
+    transition: opacity 0.3s ease;
+}
+
+.inventory-gallery-slide:not(.active) {
+    opacity: 0;
+}
+
+.inventory-gallery-slide.active {
+    opacity: 1;
+}
